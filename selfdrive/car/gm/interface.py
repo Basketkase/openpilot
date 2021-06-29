@@ -58,11 +58,11 @@ class CarInterface(CarInterfaceBase):
       ret.lateralTuning.indi.actuatorEffectivenessBP = [0.]
       ret.lateralTuning.indi.actuatorEffectivenessV = [2.0]
     elif not LQR_enabled and not INDI_enabled:
-      ret.lateralTuning.pid.kiBP, ret.lateralTuning.pid.kpBP = [[10., 30.0], [10., 30.0]]
-      ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.12, 0.18], [0.02, 0.03]]
-      ret.lateralTuning.pid.kdBP = [0.]
-      ret.lateralTuning.pid.kdV = [0.]  #corolla from shane fork : 0.725
-      ret.lateralTuning.pid.kf = 0.000045
+      ret.lateralTuning.pid.kpBP, ret.lateralTuning.pid.kiBP = [[10., 41.0], [10., 41.0]]
+      ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.18, 0.2756], [0.01, 0.0212]]
+      ret.lateralTuning.pid.kdBP = [10., 41.0]
+      ret.lateralTuning.pid.kdV = [0.7, 0.8]  #corolla from shane fork : 0.725
+      ret.lateralTuning.pid.kf = 0.000057
 
     ret.steerRateCost = 1.0
     ret.steerActuatorDelay = 0.1  # Default delay, not measured yet
@@ -88,12 +88,6 @@ class CarInterface(CarInterfaceBase):
       ret.steerRatio = 16.8
       ret.steerRatioRear = 0.
       ret.centerToFront = 2.0828 
-      #PID tunning not to prevent oversteer
-      ret.lateralTuning.pid.kpBP, ret.lateralTuning.pid.kiBP = [[10., 41.0], [10., 41.0]]
-      ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.18, 0.2756], [0.01, 0.0212]]
-      ret.lateralTuning.pid.kdBP = [10., 41.0]
-      ret.lateralTuning.pid.kdV = [0.7, 0.8]  #corolla from shane fork : 0.725
-      ret.lateralTuning.pid.kf = 0.000057
       tire_stiffness_factor = 0.5
 
     elif candidate == CAR.MALIBU:

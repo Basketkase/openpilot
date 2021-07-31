@@ -59,7 +59,7 @@ class CarInterface(CarInterfaceBase):
       ret.lateralTuning.indi.actuatorEffectivenessV = [2.0]
     elif not LQR_enabled and not INDI_enabled:
       ret.lateralTuning.pid.kpBP, ret.lateralTuning.pid.kiBP = [[10., 41.0], [10., 41.0]]
-      ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.18, 0.2756], [0.01, 0.0212]]
+      ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.2, 0.2756], [0.01, 0.0212]]
       ret.lateralTuning.pid.kdBP = [10., 41.0]
       ret.lateralTuning.pid.kdV = [0.7, 0.8]  #corolla from shane fork : 0.725
       ret.lateralTuning.pid.kf = 0.000057

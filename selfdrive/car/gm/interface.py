@@ -48,23 +48,23 @@ class CarInterface(CarInterfaceBase):
       ret.lateralTuning.lqr.dcGain = 0.002237852961363602
     elif not LQR_enabled and INDI_enabled:
       ret.lateralTuning.init('indi')
-      ret.lateralTuning.indi.innerLoopGainBP = [10., 30.]
-      ret.lateralTuning.indi.innerLoopGainV = [5.5, 8.0]
-      ret.lateralTuning.indi.outerLoopGainBP = [10., 30.]
-      ret.lateralTuning.indi.outerLoopGainV = [4.5, 7.0]
-      ret.lateralTuning.indi.timeConstantBP = [10., 30.]
-      ret.lateralTuning.indi.timeConstantV = [1.8, 3.5]
+      ret.lateralTuning.indi.innerLoopGainBP = [0., 40.]
+      ret.lateralTuning.indi.innerLoopGainV = [4.2, 7.2]
+      ret.lateralTuning.indi.outerLoopGainBP = [0., 40.]
+      ret.lateralTuning.indi.outerLoopGainV = [3.0, 6.8]
+      ret.lateralTuning.indi.timeConstantBP = [0., 40.]
+      ret.lateralTuning.indi.timeConstantV = [1.5, 2.0]
       ret.lateralTuning.indi.actuatorEffectivenessBP = [0.]
       ret.lateralTuning.indi.actuatorEffectivenessV = [2.0]
     elif not LQR_enabled and not INDI_enabled:
-      ret.lateralTuning.pid.kiBP, ret.lateralTuning.pid.kpBP = [[10., 30.0], [10., 30.0]]
-      ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.12, 0.18], [0.02, 0.03]]
-      ret.lateralTuning.pid.kdBP = [0.]
-      ret.lateralTuning.pid.kdV = [0.]  #corolla from shane fork : 0.725
-      ret.lateralTuning.pid.kf = 0.000045
+      ret.lateralTuning.pid.kpBP, ret.lateralTuning.pid.kiBP = [[10., 41.0], [10., 41.0]]
+      ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.198, 0.28], [0.015, 0.022]]
+      ret.lateralTuning.pid.kdBP = [10., 41.0]
+      ret.lateralTuning.pid.kdV = [0.77, 1.0]  #corolla from shane fork : 0.725
+      ret.lateralTuning.pid.kf = 0.000057
 
     ret.steerRateCost = 1.0
-    ret.steerActuatorDelay = 0.1  # Default delay, not measured yet
+    ret.steerActuatorDelay = 0.22
 
     if candidate == CAR.VOLT:
       # supports stop and go, but initial engage must be above 18mph (which include conservatism)
@@ -80,14 +80,14 @@ class CarInterface(CarInterfaceBase):
     elif candidate == CAR.BOLT:
       # initial engage unkown - copied from Volt. Stop and go unknown.
       ret.minEnableSpeed = -1
-      ret.minSteerSpeed = 5
-      ret.mass = 1625. + STD_CARGO_KG
+      ret.minSteerSpeed = 5 * CV.MPH_TO_MS
+      ret.mass = 1616. + STD_CARGO_KG
       ret.safetyModel = car.CarParams.SafetyModel.gm
       ret.wheelbase = 2.60096
-      ret.steerRatio = 15.2
+      ret.steerRatio = 16.8
       ret.steerRatioRear = 0.
-      ret.centerToFront = ret.wheelbase * 0.49
-      tire_stiffness_factor = 1.0
+      ret.centerToFront = 2.0828 
+      tire_stiffness_factor = 0.5
 
     elif candidate == CAR.MALIBU:
       # supports stop and go, but initial engage must be above 18mph (which include conservatism)
@@ -151,15 +151,15 @@ class CarInterface(CarInterfaceBase):
                                                                          tire_stiffness_factor=tire_stiffness_factor)
 
     ret.longitudinalTuning.kpBP = [0., 30.]
-    ret.longitudinalTuning.kpV = [0.5, 0.45]
-    ret.longitudinalTuning.kiBP = [0., 20.]
-    ret.longitudinalTuning.kiV = [0.045, 0.05]
-    ret.longitudinalTuning.kfBP = [15., 20., 25.]
+    ret.longitudinalTuning.kpV = [0.4, 0.45]
+    ret.longitudinalTuning.kiBP = [0.]
+    ret.longitudinalTuning.kiV = [0.05]
+    ret.longitudinalTuning.kfBP = [0., 13.889, 27.778]
     ret.longitudinalTuning.kfV = [1., 0.5, 0.2]
 
     if ret.enableGasInterceptor:
-      ret.gasMaxBP = [5.0, 10.0]
-      ret.gasMaxV =  [0.5, 0.7]
+      ret.gasMaxBP = [0.0, 5.0, 9.0, 35.0]
+      ret.gasMaxV =  [0.4, 0.5, 0.7, 0.7]
 
     ret.startAccel = 1.0
 

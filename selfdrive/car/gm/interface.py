@@ -58,9 +58,9 @@ class CarInterface(CarInterfaceBase):
       ret.lateralTuning.indi.actuatorEffectivenessV = [2.0]
     elif not LQR_enabled and not INDI_enabled:
       ret.lateralTuning.pid.kpBP, ret.lateralTuning.pid.kiBP = [[10., 41.0], [10., 41.0]]
-      ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.198, 0.28], [0.015, 0.022]]
+      ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.28, 0.28], [0.022, 0.022]]
       ret.lateralTuning.pid.kdBP = [10., 41.0]
-      ret.lateralTuning.pid.kdV = [1.0, 1.3]
+      ret.lateralTuning.pid.kdV = [1.4, 1.4]
       ret.lateralTuning.pid.kf = 0.000057
 
     ret.steerRateCost = 1.0

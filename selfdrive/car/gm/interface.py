@@ -58,13 +58,13 @@ class CarInterface(CarInterfaceBase):
       ret.lateralTuning.indi.actuatorEffectivenessV = [2.0]
     elif not LQR_enabled and not INDI_enabled:
       ret.lateralTuning.pid.kpBP, ret.lateralTuning.pid.kiBP = [[10., 41.0], [10., 41.0]]
-      ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.28, 0.28], [0.027, 0.027]]
+      ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.28, 0.28], [0.03, 0.03]]
       ret.lateralTuning.pid.kdBP = [10., 41.0]
-      ret.lateralTuning.pid.kdV = [1.85, 1.85]
+      ret.lateralTuning.pid.kdV = [2., 2.]
       ret.lateralTuning.pid.kf = 0.000057
 
     ret.steerRateCost = 1.0
-    ret.steerActuatorDelay = 0.22
+    ret.steerActuatorDelay = 0.2
 
     if candidate == CAR.VOLT:
       # supports stop and go, but initial engage must be above 18mph (which include conservatism)
